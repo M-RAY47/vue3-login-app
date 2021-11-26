@@ -4,15 +4,15 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
 	<title>Regiter Form with vue 3</title>
 </head>
 <body>
 	<div id="app">
-		{{ greeting }}
-		<input v-model="greeting"/>
-		<hr>
-		<div v-show="isVisible" style="width: 100px; height: 100px; color: blue"></div>
+		<custom-form />
+		<hr/>
 
+		<button @click="toggleBox">Toggle Box</button>
 	</div>
 
 	<script src="https://unpkg.com/vue@next"></script>
@@ -21,9 +21,69 @@
 			data: ()=> {
 				return {
 					greeting: 'Hello Vue 3 login!',
-					isVisible: true
+					isVisible: false
+				}
+			},
+			methods: {
+				toggleBox(){
+					this.isVisible = !this.isVisible
+				},
+				greet(greeting){
+					console.log(this.greeting)
 				}
 			}
+		})
+		app.component('custom-form', {
+			template: `
+				<form class="formClass" @submit.prevent="handleSubmit">
+					<h1>{{ title }}</h1>
+					<custom-input :label="emailLabel" v-model="email" />
+					<custom-input :label="passwordLabel" v-model="password"/>
+					<button>Log in</button>	
+				</form>
+			`,
+			components: ['custom-input'],
+			data(){
+				return {
+					title: 'Login Form',
+					email: '',
+					password: '',
+					emailLabel: 'Email',
+					passwordLabel: 'Password'
+				}
+			},
+			methods: {
+				handleSubmit(){
+					console.log("email: ",this.email, "password: ", this.password);
+				}
+			}
+		});
+		// email component
+		app.component('custom-input',{
+			template: 
+			`
+				<label>
+					{{ label }}
+					<input type="text" v-model="inputValue">
+				</label>
+			`,
+			props:['label', 'modelValue'],
+			computed: {
+				inputValue: {
+					get(){
+						return this.modelValue;
+					},
+					set(value) {
+						console.log("value: ",value);
+						this.$emit('update:modelValue', value)
+					}
+				}
+			},
+			// data(){
+			// 	return {
+			// 		inputValue: ''
+			// 	}
+			// }
 		})
 		app.mount('#app');
 	</script>

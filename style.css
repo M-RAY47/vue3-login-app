@@ -1,0 +1,11 @@
+body {
+	background-color: #aaa;
+}
+input {
+	margin: 10px;
+	display: block;
+}
+.formClass {
+	width: 50%;
+	margin: 0px auto;
+}
