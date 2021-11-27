@@ -1,88 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-	<title>Login Form with vue 3</title>
-</head>
-<body>
-	<div id="app">
-		<custom-form />
-	</div>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+		<title>Login Form with vue 3</title>
+	</head>
+	<body>
+		<div id="app">
+			<custom-form />
+		</div>
 
-	<script src="https://unpkg.com/vue@next"></script>
-	<script>
-		let app = Vue.createApp({
-			data: ()=> {
-				return {
-					greeting: 'Hello Vue 3 login!',
-					isVisible: false
-				}
-			}
-		})
-		// custom-form component
-		app.component('custom-form', {
-			template: /*html*/
-			`
-				<form class="formClass" @submit.prevent="handleSubmit">
-					<h1>{{ title }}</h1>
-					<custom-input 
-					v-for="(input, i) in inputs"
-					:key="i"
-					type="input.type"
-					:label="input.label" v-model="input.value" />
-					<button>Log in</button>	
-				</form>
-			`,
-			components: ['custom-input'],
-			data(){
-				return {
-					title: 'Login Form',
-					inputs: [
-						{
-							label: 'Email',
-							type: 'email',
-							value: ''
-						},
-						{
-							label: 'Password',
-							type: 'password',
-							value: ''
-						}
-					]
-				}
-			},
-			methods: {
-				handleSubmit(){
-					console.log("email: ",this.inputs[0].value, "password: ", this.inputs[1].value);
-					window.alert("Successefully Login");
-				}
-			}
-		});
-		// email component
-		app.component('custom-input',{
-			template: /*html*/
-			`
-				<label>
-					{{ label }}
-					<input :type="type" v-model="inputValue">
-				</label>
-			`,
-			props:['label','type', 'modelValue'],
-			computed: {
-				inputValue: {
-					get(){
-						return this.modelValue;
-					},
-					set(value) {
-						this.$emit('update:modelValue', value)
+		<script src="https://unpkg.com/vue@next"></script>
+		<script>
+			let app = Vue.createApp({
+				data: ()=> {
+					return {
+						greeting: 'Hello Vue 3 login!',
+						isVisible: false
 					}
 				}
-			}
-		})
-		app.mount('#app');
-	</script>
-</body>
+			})
+			// custom-form component
+			app.component('custom-form', {
+				template: /*html*/
+				`
+					<form class="formClass" @submit.prevent="handleSubmit">
+						<h1>{{ title }}</h1>
+						<custom-input 
+						v-for="(input, i) in inputs"
+						:key="i"
+						type="input.type"
+						:label="input.label" v-model="input.value" />
+						<button>Log in</button>	
+					</form>
+				`,
+				components: ['custom-input'],
+				data(){
+					return {
+						title: 'Login Form',
+						inputs: [
+							{
+								label: 'Email',
+								type: 'email',
+								value: ''
+							},
+							{
+								label: 'Password',
+								type: 'password',
+								value: ''
+							}
+						]
+					}
+				},
+				methods: {
+					handleSubmit(){
+						console.log("email: ",this.inputs[0].value, "password: ", this.inputs[1].value);
+						window.alert("Successefully Login");
+					}
+				}
+			});
+			// email component
+			app.component('custom-input',{
+				template: /*html*/
+				`
+					<label>
+						{{ label }}
+						<input :type="type" v-model="inputValue">
+					</label>
+				`,
+				props:['label','type', 'modelValue'],
+				computed: {
+					inputValue: {
+						get(){
+							return this.modelValue;
+						},
+						set(value) {
+							this.$emit('update:modelValue', value)
+						}
+					}
+				}
+			})
+			app.mount('#app');
+		</script>
+	</body>
 </html>
