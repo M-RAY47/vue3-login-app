@@ -23,14 +23,6 @@
 					greeting: 'Hello Vue 3 login!',
 					isVisible: false
 				}
-			},
-			methods: {
-				toggleBox(){
-					this.isVisible = !this.isVisible
-				},
-				greet(greeting){
-					console.log(this.greeting)
-				}
 			}
 		})
 		// custom-form component
@@ -91,12 +83,7 @@
 						this.$emit('update:modelValue', value)
 					}
 				}
-			},
-			// data(){
-			// 	return {
-			// 		inputValue: ''
-			// 	}
-			// }
+			}
 		})
 		app.mount('#app');
 	</script>
