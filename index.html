@@ -17,7 +17,6 @@
 			let app = Vue.createApp({
 				data: ()=> {
 					return {
-						greeting: 'Hello Vue 3 login!',
 						isVisible: false
 					}
 				}
@@ -32,7 +31,8 @@
 						v-for="(input, i) in inputs"
 						:key="i"
 						type="input.type"
-						:label="input.label" v-model="input.value" />
+						:label="input.label"
+						v-model="input.value" />
 						<button>Log in</button>	
 					</form>
 				`,
