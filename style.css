@@ -9,3 +9,7 @@ input {
 	width: 50%;
 	margin: 0px auto;
 }
+#app {
+	margin: 0px auto;
+	width: 50%
+}
